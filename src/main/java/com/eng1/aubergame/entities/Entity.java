@@ -1,4 +1,4 @@
-package entities;
+package com.eng1.aubergame.entities;
 
 import java.awt.Graphics;
 

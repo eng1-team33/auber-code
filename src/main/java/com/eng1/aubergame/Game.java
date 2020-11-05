@@ -1,9 +1,12 @@
-import gfx.*;
-import display.Display;
+package com.eng1.aubergame;
+
+import com.eng1.aubergame.gfx.*;
+import com.eng1.aubergame.display.Display;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import states.*;
+
+import com.eng1.aubergame.states.*;
+import com.eng1.aubergame.input.KeyManager;
 
 
 public class Game implements Runnable {
@@ -22,26 +25,33 @@ public class Game implements Runnable {
     private State gameState;
     private State menuState;
     private State settingsState;
+    private State demoState;
 
-
+    //Input
+    private KeyManager keyManager;
 
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
+        keyManager = new KeyManager();
     }
 
     private void init(){
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
 
-        menuState = new MenuState();
-        settingsState = new SettingsState();
-        gameState = new GameState();
+        menuState = new MenuState(this);
+        settingsState = new SettingsState(this);
+        gameState = new GameState(this);
+        demoState = new DemoState(this);
         State.setState(gameState);
     }
 
     private void update(){
+        keyManager.update();
+
         if(State.getState() != null){
             State.getState().update();
         }
@@ -91,12 +101,16 @@ public class Game implements Runnable {
             }
 
             if(timer >= 1000000000){
-                System.out.println("Updates and Frames: " + updates);
+                System.out.println("ups and fps: " + updates);
                 updates = 0;
                 timer = 0;
             }
         }
 
+    }
+
+    public KeyManager getKeyManager(){
+        return keyManager;
     }
 
     public synchronized void start() {

@@ -1,5 +1,6 @@
-package states;
+package com.eng1.aubergame.states;
 
+import com.eng1.aubergame.Game;
 import java.awt.Graphics;
 
 public abstract class State {
@@ -14,8 +15,13 @@ public abstract class State {
         return currentState;
     }
 
-
     //CLASS
+    protected Game game;
+
+    public State(Game game){
+        this.game = game;
+    }
+
     public abstract void update();
 
     public abstract void render(Graphics g);

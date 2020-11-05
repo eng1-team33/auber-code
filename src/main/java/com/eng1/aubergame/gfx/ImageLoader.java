@@ -1,4 +1,4 @@
-package gfx;
+package com.eng1.aubergame.gfx;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

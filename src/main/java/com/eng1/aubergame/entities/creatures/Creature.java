@@ -1,6 +1,6 @@
-package entities.creatures;
+package com.eng1.aubergame.entities.creatures;
 
-import entities.Entity;
+import com.eng1.aubergame.entities.Entity;
 
 public abstract class Creature extends Entity {
 
