@@ -1,13 +1,13 @@
 package com.eng1.aubergame.entities;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 public abstract class Entity {
-    
+
     protected float x, y;
     protected int width, height;
 
-    public Entity(float x, float y, int width, int height){
+    protected Entity(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;

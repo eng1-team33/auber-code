@@ -1,14 +1,14 @@
 package com.eng1.aubergame.entities.creatures;
 
-import java.awt.Graphics;
-
 import com.eng1.aubergame.Game;
 import com.eng1.aubergame.gfx.Assets;
+
+import java.awt.*;
 
 
 public class Player extends Creature {
 
-    private Game game;
+    private final Game game;
 
     public Player(Game game, float x, float y) {
         super(x, y, 39, 62);
@@ -21,20 +21,20 @@ public class Player extends Creature {
         move();
     }
 
-    private void getInput(){
+    private void getInput() {
         xMove = 0;
         yMove = 0;
 
-        if(game.getKeyManager().isUpPressed()){
+        if (game.getKeyManager().isUpPressed()) {
             yMove = -speed;
         }
-        if(game.getKeyManager().isDownPressed()){
+        if (game.getKeyManager().isDownPressed()) {
             yMove = speed;
         }
-        if(game.getKeyManager().isLeftPressed()){
+        if (game.getKeyManager().isLeftPressed()) {
             xMove = -speed;
         }
-        if(game.getKeyManager().isRightPressed()){
+        if (game.getKeyManager().isRightPressed()) {
             xMove = speed;
         }
     }

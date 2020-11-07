@@ -5,14 +5,14 @@ import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
 
-    private boolean[] keys;
+    private final boolean[] keys;
     private boolean up, down, left, right;
 
-    public KeyManager(){
+    public KeyManager() {
         keys = new boolean[256];
     }
 
-    public void update(){
+    public void update() {
         up = keys[KeyEvent.VK_W];
         down = keys[KeyEvent.VK_S];
         left = keys[KeyEvent.VK_A];

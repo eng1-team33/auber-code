@@ -1,12 +1,12 @@
 package com.eng1.aubergame;
 
-import com.eng1.aubergame.gfx.*;
 import com.eng1.aubergame.display.Display;
-import java.awt.image.BufferStrategy;
-import java.awt.Graphics;
-
-import com.eng1.aubergame.states.*;
+import com.eng1.aubergame.gfx.Assets;
 import com.eng1.aubergame.input.KeyManager;
+import com.eng1.aubergame.states.*;
+
+import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 
 public class Game implements Runnable {
@@ -28,7 +28,7 @@ public class Game implements Runnable {
     private State demoState;
 
     //Input
-    private KeyManager keyManager;
+    private final KeyManager keyManager;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -37,7 +37,7 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
     }
 
-    private void init(){
+    private void init() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
@@ -49,17 +49,17 @@ public class Game implements Runnable {
         State.setState(gameState);
     }
 
-    private void update(){
+    private void update() {
         keyManager.update();
 
-        if(State.getState() != null){
+        if (State.getState() != null) {
             State.getState().update();
         }
     }
 
-    private void render(){
+    private void render() {
         bs = display.getCanvas().getBufferStrategy();
-        if(bs == null){
+        if (bs == null) {
             display.getCanvas().createBufferStrategy(3);
             return;
         }
@@ -67,7 +67,7 @@ public class Game implements Runnable {
         //Clear Screen
         g.clearRect(0, 0, width, height);
 
-        if(State.getState() != null){
+        if (State.getState() != null) {
             State.getState().render(g);
         }
 
@@ -87,20 +87,20 @@ public class Game implements Runnable {
         long timer = 0;
         int updates = 0;
 
-        while(running){
+        while (running) {
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
 
-            if(delta >= 1){
+            if (delta >= 1) {
                 update();
                 render();
                 updates++;
                 delta--;
             }
 
-            if(timer >= 1000000000){
+            if (timer >= 1000000000) {
                 System.out.println("ups and fps: " + updates);
                 updates = 0;
                 timer = 0;
@@ -109,12 +109,12 @@ public class Game implements Runnable {
 
     }
 
-    public KeyManager getKeyManager(){
+    public KeyManager getKeyManager() {
         return keyManager;
     }
 
     public synchronized void start() {
-        if(running){
+        if (running) {
             return;
         }
         running = true;
@@ -123,7 +123,7 @@ public class Game implements Runnable {
     }
 
     public synchronized void stop() {
-        if(!running){
+        if (!running) {
             return;
         }
         running = false;

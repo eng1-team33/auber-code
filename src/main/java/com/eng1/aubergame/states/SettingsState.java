@@ -1,12 +1,12 @@
 package com.eng1.aubergame.states;
 
-import java.awt.Graphics;
-
 import com.eng1.aubergame.Game;
 
+import java.awt.*;
+
 public class SettingsState extends State {
-    
-    public SettingsState(Game game){
+
+    public SettingsState(Game game) {
         super(game);
     }
 
@@ -17,6 +17,6 @@ public class SettingsState extends State {
 
     @Override
     public void render(Graphics g) {
-        
+
     }
 }

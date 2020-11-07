@@ -3,12 +3,12 @@ package com.eng1.aubergame.gfx;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-    
+
     //List out all image assets used in the game
     //public static BufferedImage player, dirt, grass, stone, tree, ... ;
     public static BufferedImage player;
 
-    public static void init(){
+    public static void init() {
         //SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage(path));
 
         player = ImageLoader.loadImage("/textures/Auber1.png");

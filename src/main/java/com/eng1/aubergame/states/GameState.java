@@ -1,21 +1,22 @@
 package com.eng1.aubergame.states;
 
-import java.awt.Graphics;
-
-import com.eng1.aubergame.entities.creatures.Player;
 import com.eng1.aubergame.Game;
+import com.eng1.aubergame.entities.creatures.Player;
+
+import java.awt.*;
 
 public class GameState extends State {
 
-    private Player player;
+    private final Player player;
 
-    public GameState(Game game){
+    public GameState(Game game) {
         this(game, new Player(game, 100, 100));
     }
 
-    public GameState(Game game, Player player){
+    public GameState(Game game, Player player) {
         super(game);
         this.player = player;
+
     }
 
     @Override
