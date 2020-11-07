@@ -11,29 +11,37 @@ public class Player extends Creature {
     private Game game;
 
     public Player(Game game, float x, float y) {
-        super(x, y);
+        super(x, y, 39, 62);
         this.game = game;
     }
 
     @Override
     public void update() {
-        if(game.getKeyManager().up){
-            y -= 5;
+        getInput();
+        move();
+    }
+
+    private void getInput(){
+        xMove = 0;
+        yMove = 0;
+
+        if(game.getKeyManager().isUpPressed()){
+            yMove = -speed;
         }
-        if(game.getKeyManager().down){
-            y += 5;
+        if(game.getKeyManager().isDownPressed()){
+            yMove = speed;
         }
-        if(game.getKeyManager().left){
-            x -= 5;
+        if(game.getKeyManager().isLeftPressed()){
+            xMove = -speed;
         }
-        if(game.getKeyManager().right){
-            x += 5;
+        if(game.getKeyManager().isRightPressed()){
+            xMove = speed;
         }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) x, (int) y, null);
+        g.drawImage(Assets.player, (int) x, (int) y, width, height, null);
     }
 
 }
