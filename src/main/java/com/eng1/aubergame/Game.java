@@ -47,7 +47,7 @@ public class Game implements Runnable {
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
 
-        camera = new Camera(0,0);
+        camera = new Camera(this, 0,0);
 
         menuState = new MenuState(this);
         settingsState = new SettingsState(this);
