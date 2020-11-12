@@ -10,13 +10,12 @@ public class GameState extends State {
     private final Player player;
 
     public GameState(Game game) {
-        this(game, new Player(game, 100, 100));
+        this(game, new Player(game, 960, 540));
     }
 
     public GameState(Game game, Player player) {
         super(game);
         this.player = player;
-
     }
 
     @Override

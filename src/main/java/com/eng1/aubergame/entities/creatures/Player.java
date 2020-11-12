@@ -2,6 +2,7 @@ package com.eng1.aubergame.entities.creatures;
 
 import com.eng1.aubergame.Game;
 import com.eng1.aubergame.gfx.Assets;
+import com.eng1.aubergame.gfx.Camera;
 
 import java.awt.*;
 
@@ -9,16 +10,19 @@ import java.awt.*;
 public class Player extends Creature {
 
     private final Game game;
+    private final Camera camera;
 
     public Player(Game game, float x, float y) {
         super(x, y, 39, 62);
         this.game = game;
+        this.camera = game.getCamera();
     }
 
     @Override
     public void update() {
         getInput();
         move();
+        camera.move(xMove, yMove);
     }
 
     private void getInput() {
@@ -41,7 +45,7 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) x, (int) y, width, height, null);
+        this.camera.drawOffsetImage(Assets.player, (int) x, (int) y, width, height, null, g);
     }
 
 }

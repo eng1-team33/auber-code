@@ -2,6 +2,7 @@ package com.eng1.aubergame;
 
 import com.eng1.aubergame.display.Display;
 import com.eng1.aubergame.gfx.Assets;
+import com.eng1.aubergame.gfx.Camera;
 import com.eng1.aubergame.input.KeyManager;
 import com.eng1.aubergame.states.*;
 
@@ -12,7 +13,7 @@ import java.awt.image.BufferStrategy;
 public class Game implements Runnable {
 
     private Display display;
-    public int width, height;
+    private int width, height;
     public String title;
 
     private boolean running = false;
@@ -30,6 +31,10 @@ public class Game implements Runnable {
     //Input
     private final KeyManager keyManager;
 
+
+    //Camera
+    private Camera camera;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
@@ -41,6 +46,8 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
+
+        camera = new Camera(0,0);
 
         menuState = new MenuState(this);
         settingsState = new SettingsState(this);
@@ -111,6 +118,18 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+
+    public Camera getCamera(){
+        return camera;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public synchronized void start() {
