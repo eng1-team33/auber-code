@@ -10,7 +10,7 @@ public class GameState extends State {
     private final Player player;
 
     public GameState(Game game) {
-        this(game, new Player(game, 960, 540));
+        this(game, new Player(game, 960, 450));
     }
 
     public GameState(Game game, Player player) {
