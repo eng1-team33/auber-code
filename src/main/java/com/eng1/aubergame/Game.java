@@ -35,11 +35,14 @@ public class Game implements Runnable {
     //Camera
     private Camera camera;
 
+    public CollisionManager collisionManager;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
+        collisionManager = new CollisionManager();
     }
 
     private void init() {
@@ -114,6 +117,9 @@ public class Game implements Runnable {
             }
         }
 
+    }
+    public CollisionManager getCollisionManager() {
+        return collisionManager;
     }
 
     public KeyManager getKeyManager() {
