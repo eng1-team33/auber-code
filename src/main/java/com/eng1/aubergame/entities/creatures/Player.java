@@ -1,6 +1,6 @@
 package com.eng1.aubergame.entities.creatures;
 
-import com.eng1.aubergame.CollisionManager;
+import com.eng1.aubergame.handlers.CollisionManager;
 import com.eng1.aubergame.Game;
 import com.eng1.aubergame.entities.CollisionRectangle;
 import com.eng1.aubergame.gfx.Animation;
@@ -91,7 +91,7 @@ public class Player extends Creature {
     }
 
     private BufferedImage getCurrentAnimationFrame(){
-        if(xMove > 0 || yMove > 0){
+        if(xMove != 0 || yMove != 0){
             return animWalking.getCurrentFrame();
         }
         return Assets.player;

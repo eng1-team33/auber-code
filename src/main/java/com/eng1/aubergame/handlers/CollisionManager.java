@@ -1,4 +1,4 @@
-package com.eng1.aubergame;
+package com.eng1.aubergame.handlers;
 
 import com.eng1.aubergame.entities.CollisionRectangle;
 
