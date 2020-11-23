@@ -4,6 +4,7 @@ import com.eng1.aubergame.display.Display;
 import com.eng1.aubergame.gfx.Assets;
 import com.eng1.aubergame.gfx.Camera;
 import com.eng1.aubergame.input.KeyManager;
+import com.eng1.aubergame.input.MouseManager;
 import com.eng1.aubergame.states.*;
 
 import java.awt.*;
@@ -23,13 +24,14 @@ public class Game implements Runnable {
     private Graphics g;
 
     //States
-    private State gameState;
-    private State menuState;
-    private State settingsState;
-    private State demoState;
+    public State gameState;
+    public State menuState;
+    public State settingsState;
+    public State demoState;
 
     //Input
     private final KeyManager keyManager;
+    private final MouseManager mouseManager;
 
 
     //Camera
@@ -40,11 +42,16 @@ public class Game implements Runnable {
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
     private void init() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
         Assets.init();
 
         camera = new Camera(this, 0,0);
@@ -53,7 +60,7 @@ public class Game implements Runnable {
         settingsState = new SettingsState(this);
         gameState = new GameState(this);
         demoState = new DemoState(this);
-        State.setState(gameState);
+        State.setState(menuState);
     }
 
     private void update() {
@@ -119,6 +126,8 @@ public class Game implements Runnable {
     public KeyManager getKeyManager() {
         return keyManager;
     }
+
+    public MouseManager getMouseManager(){return mouseManager;}
 
     public Camera getCamera(){
         return camera;
