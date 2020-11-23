@@ -1,6 +1,8 @@
 package com.eng1.aubergame.entities.creatures;
 
+import com.eng1.aubergame.entities.World;
 import com.eng1.aubergame.Game;
+import com.eng1.aubergame.entities.CollisionRectangle;
 import com.eng1.aubergame.gfx.Animation;
 import com.eng1.aubergame.gfx.Assets;
 import com.eng1.aubergame.gfx.Camera;
@@ -16,10 +18,13 @@ public class Player extends Creature {
     private final Game game;
     private final Camera camera;
 
-    public Player(Game game, float x, float y) {
-        super(x, y, 39, 62);
+    private CollisionRectangle hitbox;
+
+    public Player(Game game, World world, float x, float y) {
+        super(game, world, x, y, 39, 62);
         this.game = game;
         this.camera = game.getCamera();
+        this.hitbox = new CollisionRectangle(game, this.getX(), this.getY(), this.getWidth(),this.getHeight());
 
         animWalking = new Animation(250, Assets.playerWalking);
     }
@@ -28,8 +33,11 @@ public class Player extends Creature {
     public void update() {
         animWalking.update();
         getInput();
+        checkCollisions();
         move();
         camera.move(xMove, yMove);
+        hitbox.setX(this.getX());
+        hitbox.setY(this.getY());
     }
 
     private void getInput() {
@@ -55,8 +63,10 @@ public class Player extends Creature {
         this.camera.drawOffsetImage(getCurrentAnimationFrame(), (int) x, (int) y, width, height, null, g);
     }
 
+
+
     private BufferedImage getCurrentAnimationFrame(){
-        if(xMove > 0 || yMove > 0){
+        if(xMove != 0 || yMove != 0){
             return animWalking.getCurrentFrame();
         }
         return Assets.player;

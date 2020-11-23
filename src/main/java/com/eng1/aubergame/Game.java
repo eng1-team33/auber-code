@@ -1,8 +1,11 @@
 package com.eng1.aubergame;
 
 import com.eng1.aubergame.display.Display;
+import com.eng1.aubergame.entities.systems.System;
 import com.eng1.aubergame.gfx.Assets;
 import com.eng1.aubergame.gfx.Camera;
+import com.eng1.aubergame.handlers.CollisionManager;
+import com.eng1.aubergame.handlers.TeleporterManager;
 import com.eng1.aubergame.input.KeyManager;
 import com.eng1.aubergame.input.MouseManager;
 import com.eng1.aubergame.states.*;
@@ -37,12 +40,25 @@ public class Game implements Runnable {
     //Camera
     private Camera camera;
 
+    private final CollisionManager collisionManager;
+    private final TeleporterManager teleporterManager;
+
+    private boolean sabotageInProgress = false;
+
+    private System systemBeingSabotaged;
+
+    private int innocentsArrested = 0;
+    private int infiltratorsArrested = 0;
+    private int infiltratorsInGame;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
+        collisionManager = new CollisionManager();
+        teleporterManager = new TeleporterManager();
     }
 
     private void init() {
@@ -97,12 +113,12 @@ public class Game implements Runnable {
         double timePerTick = 1000000000 / fps;
         double delta = 0;
         long now;
-        long lastTime = System.nanoTime();
+        long lastTime = java.lang.System.nanoTime();
         long timer = 0;
         int updates = 0;
 
         while (running) {
-            now = System.nanoTime();
+            now = java.lang.System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
@@ -115,12 +131,15 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                System.out.println("ups and fps: " + updates);
+                java.lang.System.out.println("ups and fps: " + updates);
                 updates = 0;
                 timer = 0;
             }
         }
 
+    }
+    public CollisionManager getCollisionManager() {
+        return collisionManager;
     }
 
     public KeyManager getKeyManager() {
@@ -128,6 +147,9 @@ public class Game implements Runnable {
     }
 
     public MouseManager getMouseManager(){return mouseManager;}
+    public TeleporterManager getTeleporterManager() {
+        return teleporterManager;
+    }
 
     public Camera getCamera(){
         return camera;
@@ -139,6 +161,22 @@ public class Game implements Runnable {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setSystemBeingSabotaged(System system) {
+        this.systemBeingSabotaged = system;
+    }
+
+    public void setSabotageInProgress(boolean sabotage) {
+        this.sabotageInProgress = sabotage;
+    }
+
+    public boolean getSabotageInProgress() {
+        return this.sabotageInProgress;
+    }
+
+    public void setInfiltratorsInGame(int n) {
+        infiltratorsInGame = n;
     }
 
     public synchronized void start() {
