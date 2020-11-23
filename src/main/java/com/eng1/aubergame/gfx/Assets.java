@@ -21,8 +21,8 @@ public class Assets {
         playerWalking[1] = ImageLoader.loadImage("/textures/Auber2.png");
 
         buttonStart = new BufferedImage[2];
-        buttonStart[0] = ImageLoader.loadImage("/textures/start.jpg");
-        buttonStart[1] = ImageLoader.loadImage("/textures/startHovered.jpg");
+        buttonStart[0] = ImageLoader.loadImage("/textures/play.jpg");
+        buttonStart[1] = ImageLoader.loadImage("/textures/playHovered.jpg");
 
         buttonDemo = new BufferedImage[2];
         buttonDemo[0] = ImageLoader.loadImage("/textures/demo.jpg");
