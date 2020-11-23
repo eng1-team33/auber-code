@@ -17,9 +17,9 @@ public class InfiltratorManager {
     private int randomIndex;
 
     public InfiltratorManager(World world, Game game) {
-        this.generateInfiltrators(7);
         this.world = world;
         this.game = game;
+        this.generateInfiltrators(7);
         timer = 0;
         lastTime = System.currentTimeMillis();
         randomTime = 15000;

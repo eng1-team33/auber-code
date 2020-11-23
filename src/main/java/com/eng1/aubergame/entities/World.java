@@ -34,13 +34,13 @@ public class World extends Entity {
         this.camera.drawOffsetImage(Assets.world, (int) x, (int) y, width, height, null, g);
     }
 
-    public Room randomRoom() {
+    public Room getRandomRoom() {
         return rooms[(int)(System.currentTimeMillis() % rooms.length)];
     }
 
     public int[] randomPointInWorld() {
         int[] randomPoint = new int[2];
-        Room randomRoom = randomRoom();
+        Room randomRoom = getRandomRoom();
         randomPoint[0] = ThreadLocalRandom.current().nextInt((int)randomRoom.getX() + 10, (int)randomRoom.getX() + randomRoom.getWidth() - 10);
         randomPoint[1] = ThreadLocalRandom.current().nextInt((int)randomRoom.getY() + 10, (int)randomRoom.getY() + randomRoom.getHeight() - 10);
         return randomPoint;

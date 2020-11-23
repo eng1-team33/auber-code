@@ -1,6 +1,6 @@
 package com.eng1.aubergame.entities.creatures;
 
-import com.eng1.aubergame.handlers.CollisionManager;
+import com.eng1.aubergame.entities.World;
 import com.eng1.aubergame.Game;
 import com.eng1.aubergame.entities.CollisionRectangle;
 import com.eng1.aubergame.gfx.Animation;
@@ -20,8 +20,8 @@ public class Player extends Creature {
 
     private CollisionRectangle hitbox;
 
-    public Player(Game game, float x, float y) {
-        super(game, x, y, 39, 62);
+    public Player(Game game, World world, float x, float y) {
+        super(game, world, x, y, 39, 62);
         this.game = game;
         this.camera = game.getCamera();
         this.hitbox = new CollisionRectangle(game, this.getX(), this.getY(), this.getWidth(),this.getHeight());
