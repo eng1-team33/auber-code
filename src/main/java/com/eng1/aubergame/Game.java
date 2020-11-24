@@ -58,7 +58,7 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
         collisionManager = new CollisionManager();
-        teleporterManager = new TeleporterManager();
+        teleporterManager = new TeleporterManager(this);
     }
 
     private void init() {

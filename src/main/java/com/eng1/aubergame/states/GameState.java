@@ -21,14 +21,24 @@ public class GameState extends State {
         //this.infiltratorManager = new InfiltratorManager(world, game);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     @Override
     public void update() {
+        if (!game.getTeleporterManager().isMenuActive()) {
+            return;
+        }
         player.update();
         //infiltratorManager.update();
     }
 
     @Override
     public void render(Graphics g) {
+        if (!game.getTeleporterManager().isMenuActive()) {
+            return;
+        }
         world.render(g);
         player.render(g);
     }

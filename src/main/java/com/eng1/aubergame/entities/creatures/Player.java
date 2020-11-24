@@ -56,8 +56,8 @@ public class Player extends Creature {
         if (game.getKeyManager().isRightPressed()) {
             xMove = speed;
         }
-    }
 
+    }
     @Override
     public void render(Graphics g) {
         this.camera.drawOffsetImage(getCurrentAnimationFrame(), (int) x, (int) y, width, height, null, g);
