@@ -49,7 +49,7 @@ public class Game implements Runnable {
 
     private int innocentsArrested = 0;
     private int infiltratorsArrested = 0;
-    private int infiltratorsInGame;
+    private int infiltratorsRemaining;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -70,7 +70,7 @@ public class Game implements Runnable {
         display.getCanvas().addMouseMotionListener(mouseManager);
         Assets.init();
 
-        camera = new Camera(this, 0,0);
+        camera = new Camera(this, 1000,0);
 
         menuState = new MenuState(this);
         settingsState = new SettingsState(this);
@@ -131,7 +131,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                java.lang.System.out.println("ups and fps: " + updates);
+                //java.lang.System.out.println("ups and fps: " + updates);
                 updates = 0;
                 timer = 0;
             }
@@ -175,8 +175,8 @@ public class Game implements Runnable {
         return this.sabotageInProgress;
     }
 
-    public void setInfiltratorsInGame(int n) {
-        infiltratorsInGame = n;
+    public void setInfiltratorsRemaining(int n) {
+        infiltratorsRemaining = n;
     }
 
     public synchronized void start() {

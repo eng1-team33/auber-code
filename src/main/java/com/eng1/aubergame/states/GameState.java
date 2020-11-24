@@ -16,8 +16,8 @@ public class GameState extends State {
 
     public GameState(Game game) {
         super(game);
-        this.world = new World(game, 0, 0, 3500, 3500);
-        this.player = new Player(game, world, 960, 450);
+        this.world = new World(game, 0, 0, 7500, 4219);
+        this.player = new Player(game, world, 1960, 400);
         //this.infiltratorManager = new InfiltratorManager(world, game);
     }
 

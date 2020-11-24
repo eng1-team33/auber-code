@@ -27,6 +27,7 @@ public class Display {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));

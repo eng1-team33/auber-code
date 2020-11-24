@@ -43,18 +43,18 @@ public class Camera {
     }
 
     public void drawOffsetImage(Image image, int x, int y, int width, int height, ImageObserver observer, Graphics g){
-        if (onScreen(x, y, width, height)) {
+        //if (onScreen(x, y, width, height)) {
             g.drawImage(image, (int) (x - this.xOffset), (int) (y - this.yOffset), width, height, null);
-        }
+        //}
     }
 
-    public boolean onScreen(int x, int y, int width, int height){
-        boolean visible = true;
-        if(x + width < xStart || x > xEnd || y + height < yStart || y > yEnd){
-            visible = false;
-        }
-        return visible;
-    }
+    //public boolean onScreen(int x, int y, int width, int height){
+        //boolean visible = true;
+        //if(x + width < xStart || x > xEnd || y + height < yStart || y > yEnd){
+            //visible = false;
+        //}
+        //return visible;
+    //}
 
     public float getXOffset() {
         return xOffset;

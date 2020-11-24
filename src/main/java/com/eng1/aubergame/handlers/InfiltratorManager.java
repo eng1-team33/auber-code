@@ -51,7 +51,7 @@ public class InfiltratorManager {
     }
 
     public void generateInfiltrators(int n) {
-        game.setInfiltratorsInGame(n);
+        game.setInfiltratorsRemaining(n);
         for(int i = 0; i <= n; i++) {
             int[] randomPoint = world.randomPointInWorld();
             Infiltrator infiltrator1 = new Infiltrator(game, world, randomPoint[0], randomPoint[1]);
