@@ -21,7 +21,7 @@ public class Player extends Creature {
     private CollisionRectangle hitbox;
 
     public Player(Game game, World world, float x, float y) {
-        super(game, world, x, y, 39, 62);
+        super(game, world, x, y, 49, 78);
         this.game = game;
         this.camera = game.getCamera();
         this.hitbox = new CollisionRectangle(game, this.getX(), this.getY(), this.getWidth(),this.getHeight());
@@ -31,9 +31,9 @@ public class Player extends Creature {
 
     @Override
     public void update() {
+        java.lang.System.out.println("x: " + this.getX() + " y: " + this.getY());
         animWalking.update();
         getInput();
-        checkCollisions();
         move();
         camera.move(xMove, yMove);
         hitbox.setX(this.getX());
