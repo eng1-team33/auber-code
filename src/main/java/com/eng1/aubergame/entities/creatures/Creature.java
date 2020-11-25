@@ -5,7 +5,6 @@ import com.eng1.aubergame.entities.CollisionRectangle;
 import com.eng1.aubergame.entities.Entity;
 import com.eng1.aubergame.entities.Room;
 import com.eng1.aubergame.entities.World;
-import com.eng1.aubergame.entities.systems.System;
 import com.eng1.aubergame.handlers.CollisionManager;
 
 import java.util.Random;
@@ -16,7 +15,7 @@ import static java.lang.Math.sqrt;
 
 public abstract class Creature extends Entity {
 
-    public static final int DEFAULT_HEALTH = 10;
+    public static final int DEFAULT_HEALTH = 100;
     public static final float DEFAULT_SPEED = 4.0f;
     public static final int DEFAULT_CREATURE_WIDTH = 64, DEFAULT_CREATURE_HEIGHT = 64;
     public static final double DIAGONAL_MOVE_ADJUSTMENT = sqrt(0.5);
@@ -29,7 +28,7 @@ public abstract class Creature extends Entity {
     protected float xMove, yMove;
 
     protected boolean arrested = false;
-    private boolean idle = true;
+    protected boolean idle = true;
 
     private int wanderState = 0;
     //States {0 = walking to given point, 1 = waiting for random time at point}
@@ -43,6 +42,9 @@ public abstract class Creature extends Entity {
     private boolean atYCoord = false;
 
     protected final World world;
+
+    private final Random random = new Random();
+    private int randomSign = 0;
 
     protected Creature(Game game, World world, float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -98,7 +100,6 @@ public abstract class Creature extends Entity {
     }
 
     public void updateMovement() {
-        if(this.getXMove() != 0 || this.getYMove() != 0){
             if(this.getX() < destinationX - 10) {
                 this.setXMove(speed);
             } else if(this.getX() > destinationX + 10) {
@@ -119,7 +120,7 @@ public abstract class Creature extends Entity {
                 idle = true;
             }
         }
-    }
+
 
     public void setCurrentRoom() {
         currentRoom = world.getCurrentRoom(this.getX(), this.getY());
@@ -128,26 +129,30 @@ public abstract class Creature extends Entity {
     public void wander() {
         switch (wanderState) {
             case 0:
-                if(destinationRoom == null){
-                    destinationRoom = currentRoom.getRandomAdjacentRoom();
-                    destinationX = destinationRoom.getX() + (destinationRoom.getWidth() / 2);
-                    destinationY = destinationRoom.getY() + (destinationRoom.getHeight() / 2);
-                    idle = false;
-                } else if(destinationRoom == currentRoom){
-                    if(atXCoord && atYCoord) {
-                        wanderState = 1;
-                        waitTimer = 0;
-                        lastTimeWander = java.lang.System.currentTimeMillis();
-                        randomTimeToWait = ThreadLocalRandom.current().nextInt(500, 3000);
-                    } else {
-                        destinationX = ThreadLocalRandom.current().nextInt((int) destinationRoom.getX() + 20, (int) destinationRoom.getX() + destinationRoom.getWidth() - 20);
-                        destinationY = ThreadLocalRandom.current().nextInt((int) destinationRoom.getY() + 20, (int) destinationRoom.getY() + destinationRoom.getHeight() - 20);
-                        idle = false;
-                    }
+                if(currentRoom == null) {
+                    wanderState = 3;
                 } else {
-                    destinationX = destinationRoom.getX() + (destinationRoom.getWidth() / 2);
-                    destinationY = destinationRoom.getY() + (destinationRoom.getHeight() / 2);
-                    idle = true;
+                    if (destinationRoom == null) {
+                        destinationRoom = currentRoom.getRandomAdjacentRoom();
+                        destinationX = destinationRoom.getX() + (destinationRoom.getWidth() / 2);
+                        destinationY = destinationRoom.getY() + (destinationRoom.getHeight() / 2);
+                        idle = false;
+                    } else if (destinationRoom == currentRoom) {
+                        if (atXCoord && atYCoord) {
+                            wanderState = 1;
+                            waitTimer = 0;
+                            lastTimeWander = java.lang.System.currentTimeMillis();
+                            randomTimeToWait = ThreadLocalRandom.current().nextInt(50, 200);
+                        } else {
+                            destinationX = ThreadLocalRandom.current().nextInt((int) destinationRoom.getX() + 20, (int) destinationRoom.getX() + destinationRoom.getWidth() - 20);
+                            destinationY = ThreadLocalRandom.current().nextInt((int) destinationRoom.getY() + 20, (int) destinationRoom.getY() + destinationRoom.getHeight() - 20);
+                            idle = false;
+                        }
+                    } else {
+                        destinationX = destinationRoom.getX() + (destinationRoom.getWidth() / 2);
+                        destinationY = destinationRoom.getY() + (destinationRoom.getHeight() / 2);
+                        idle = true;
+                    }
                 }
             case 1:
                 waitTimer += java.lang.System.currentTimeMillis() - lastTimeWander;
@@ -157,6 +162,17 @@ public abstract class Creature extends Entity {
                     waitTimer = 0;
                     wanderState = 0;
                 }
+                break;
+            case 2:
+                if(randomSign == 0) {
+                    if (random.nextBoolean()) {
+                        randomSign = 1;
+                    } else {
+                        randomSign = -1;
+                    }
+                }
+                this.setXMove(speed * randomSign);
+                this.setYMove(speed * randomSign);
                 break;
         }
     }

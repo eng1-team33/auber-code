@@ -3,7 +3,9 @@ package com.eng1.aubergame.handlers;
 import com.eng1.aubergame.Game;
 import com.eng1.aubergame.entities.World;
 import com.eng1.aubergame.entities.creatures.Infiltrator;
+import com.eng1.aubergame.entities.creatures.Player;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,11 +17,13 @@ public class InfiltratorManager {
     private long lastTime, timer;
     private int randomTime;
     private int randomIndex;
+    private final Player player;
 
-    public InfiltratorManager(World world, Game game) {
+    public InfiltratorManager(World world, Game game, Player player) {
         this.world = world;
         this.game = game;
-        this.generateInfiltrators(7);
+        this.player = player;
+        this.generateInfiltrators(game.getInfiltratorsInGame());
         timer = 0;
         lastTime = System.currentTimeMillis();
         randomTime = 15000;
@@ -49,12 +53,17 @@ public class InfiltratorManager {
             activeInfiltrators.get(randomIndex).setCurrentState(1);
         }
     }
+    public void render(Graphics g) {
+        for (Infiltrator infiltrator : activeInfiltrators) {
+            infiltrator.render(g);
+        }
+    }
 
     public void generateInfiltrators(int n) {
-        game.setInfiltratorsRemaining(n);
-        for(int i = 0; i <= n; i++) {
+        for(int i = 0; i < n; i++) {
             int[] randomPoint = world.randomPointInWorld();
-            Infiltrator infiltrator1 = new Infiltrator(game, world, randomPoint[0], randomPoint[1]);
+            Infiltrator infiltrator = new Infiltrator(game, world, player, randomPoint[0], randomPoint[1] + 50);
+            this.activeInfiltrators.add(infiltrator);
         }
     }
 }
