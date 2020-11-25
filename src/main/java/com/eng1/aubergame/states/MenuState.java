@@ -28,15 +28,15 @@ public class MenuState extends State {
         uiManager.addObject(new UIImageButton(710, 300, 500, 200, Assets.buttonDemo, new ClickListener() {
             @Override
             public void onClick() {
-                game.getMouseManager().setUIManager(null);
-                State.setState(game.demoState);
+                //game.getMouseManager().setUIManager(null);
+                //State.setState(game.demoState);
             }
         }));
         uiManager.addObject(new UIImageButton(710, 550, 500, 200, Assets.buttonSettings, new ClickListener() {
             @Override
             public void onClick() {
-                game.getMouseManager().setUIManager(null);
-                State.setState(game.settingsState);
+                //game.getMouseManager().setUIManager(null);
+                //State.setState(game.settingsState);
             }
         }));
         uiManager.addObject(new UIImageButton(710, 800, 500, 200, Assets.buttonQuit, new ClickListener() {
