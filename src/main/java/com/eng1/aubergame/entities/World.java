@@ -56,4 +56,11 @@ public class World extends Entity {
         return null;
     }
 
+    public int totalSystemsActive(){
+        int totalSystems=0;
+        for(Room room: rooms){
+        totalSystems+=room.activeSystems(); }
+        return totalSystems;
+    }
+
 }

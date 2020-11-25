@@ -34,8 +34,14 @@ public class GameState extends State {
         if (game.getTeleporterManager().isMenuActive()) {
             return;
         }
+       // if (game.getInfiltratorsArrested()== game.getInfiltratorsInGame()){
+       //     playerWin();
+       // }else if (world.totalSystemsActive() == 0){
+       //     playerLose();
+       // }
 
         player.update();
+
         //infiltratorManager.update();
     }
 
@@ -44,14 +50,22 @@ public class GameState extends State {
         if (game.getTeleporterManager().isMenuActive()) {
             return;
         }
-        //Text.drawString(g,("Systems Remaining:"+))
         world.render(g);
         player.render(g);
         Text.drawString(g, ("Health: "+player.getHealth()),10,30,false,red, Assets.font28);
         Text.drawString(g, ("Imposters Remaining: "+(game.getInfiltratorsInGame()-game.getInfiltratorsArrested())),10,60,false,red, Assets.font28);
+        Text.drawString(g, ("Systems Remaining: "+(world.totalSystemsActive())),10,90,false,red, Assets.font28);
     }
 
     public void pauseGame(){
+
+    }
+
+    public void playerWin(){
+
+    }
+
+    public void playerLose(){
 
     }
 
