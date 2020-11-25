@@ -64,6 +64,7 @@ public class World extends Entity {
 
     }
 
+
     @Override
     public void update() {
 
@@ -98,6 +99,11 @@ public class World extends Entity {
     public void addRoomConnection(Room room1, Room room2){
         room1.addAdjacentRoom(room2);
         room2.addAdjacentRoom(room1);
+    public int totalSystemsActive(){
+        int totalSystems=0;
+        for(Room room: rooms){
+        totalSystems+=room.activeSystems(); }
+        return totalSystems;
     }
 
 }

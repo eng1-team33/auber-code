@@ -58,7 +58,7 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
         collisionManager = new CollisionManager();
-        teleporterManager = new TeleporterManager();
+        teleporterManager = new TeleporterManager(this);
     }
 
     private void init() {
@@ -177,6 +177,14 @@ public class Game implements Runnable {
 
     public void setInfiltratorsRemaining(int n) {
         infiltratorsRemaining = n;
+    }
+
+    public int getInfiltratorsArrested() {
+        return infiltratorsArrested;
+    }
+
+    public int getInfiltratorsInGame() {
+        return infiltratorsInGame;
     }
 
     public synchronized void start() {
