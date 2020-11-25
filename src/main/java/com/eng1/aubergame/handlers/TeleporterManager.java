@@ -87,6 +87,9 @@ public class TeleporterManager {
 
     public void update(){
         teleportButtons.tick();
+        for(Teleporter teleporter : teleporters) {
+            teleporter.update();
+        }
     }
 
 

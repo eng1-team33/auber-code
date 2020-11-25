@@ -11,34 +11,23 @@ public class Camera {
 
     private final Game game;
 
-    private float xOffset, yOffset, xStart, xEnd, yStart, yEnd;
+    private float xOffset;
+    private float yOffset;
     public static final double DIAGONAL_MOVE_ADJUSTMENT = sqrt(0.5);
 
     public Camera(Game game, float xOffset, float yOffset){
         this.xOffset = xOffset;
         this.yOffset = yOffset;
         this.game = game;
-        xStart = 0;
-        yStart = 0;
-        xEnd = this.game.getWidth();
-        yEnd = this.game.getHeight();
     }
 
     public void move(float xAmt, float yAmt){
         if (xAmt == 0 || yAmt == 0) {
             this.xOffset += xAmt;
             this.yOffset += yAmt;
-            this.xStart += xAmt;
-            this.xEnd += xAmt;
-            this.yStart += yAmt;
-            this.yEnd += yAmt;
         } else {
             this.xOffset += DIAGONAL_MOVE_ADJUSTMENT * xAmt;
             this.yOffset += DIAGONAL_MOVE_ADJUSTMENT * yAmt;
-            this.xStart += DIAGONAL_MOVE_ADJUSTMENT * xAmt;
-            this.xEnd += DIAGONAL_MOVE_ADJUSTMENT * xAmt;
-            this.yStart += DIAGONAL_MOVE_ADJUSTMENT * yAmt;
-            this.yEnd += DIAGONAL_MOVE_ADJUSTMENT * yAmt;
         }
     }
 
@@ -48,16 +37,22 @@ public class Camera {
         //}
     }
 
-    //public boolean onScreen(int x, int y, int width, int height){
-        //boolean visible = true;
-        //if(x + width < xStart || x > xEnd || y + height < yStart || y > yEnd){
-            //visible = false;
-        //}
-        //return visible;
-    //}
+    public void drawOffsetRectangle(int x, int y, int width, int height, Graphics g) {
+        g.setColor(Color.RED);
+        g.fillRect((int) (x - this.xOffset), (int) (y - this.yOffset), width, height);
+        g.setColor(Color.black);
+    }
 
     public float getXOffset() {
         return xOffset;
+    }
+
+    public void addXOffset(int i) {
+        xOffset += i;
+    }
+
+    public void addYOffset(int i) {
+        yOffset += i;
     }
 
     public void setXOffset(float xOffset) {
