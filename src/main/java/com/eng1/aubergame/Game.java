@@ -49,7 +49,9 @@ public class Game implements Runnable {
 
     private int innocentsArrested = 0;
     private int infiltratorsArrested = 0;
-    private int infiltratorsRemaining;
+    private int infiltratorsInGame = 7;
+
+    private int systemsRemaining = 9;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -70,11 +72,11 @@ public class Game implements Runnable {
         display.getCanvas().addMouseMotionListener(mouseManager);
         Assets.init();
 
-        camera = new Camera(this, 1000,0);
+        camera = new Camera(this, 2000,700);
 
         menuState = new MenuState(this);
         settingsState = new SettingsState(this);
-        gameState = new GameState(this);
+        gameState = new GameState(this, camera);
         demoState = new DemoState(this);
         State.setState(menuState);
     }
@@ -131,7 +133,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                //java.lang.System.out.println("ups and fps: " + updates);
+                java.lang.System.out.println("ups and fps: " + updates);
                 updates = 0;
                 timer = 0;
             }
@@ -155,6 +157,26 @@ public class Game implements Runnable {
         return camera;
     }
 
+    public int getSystemsRemaining() {
+        return systemsRemaining;
+    }
+
+    public void setSystemsRemaining(int systemsRemaining) {
+        this.systemsRemaining = systemsRemaining;
+    }
+
+    public int getInnocentsArrested() {
+        return innocentsArrested;
+    }
+
+    public void setInnocentsArrested(int innocentsArrested) {
+        this.innocentsArrested = innocentsArrested;
+    }
+
+    public void setInfiltratorsArrested(int infiltratorsArrested) {
+        this.infiltratorsArrested = infiltratorsArrested;
+    }
+
     public int getWidth() {
         return width;
     }
@@ -167,16 +189,16 @@ public class Game implements Runnable {
         this.systemBeingSabotaged = system;
     }
 
+    public System getSystemBeingSabotaged() {
+        return this.systemBeingSabotaged;
+    }
+
     public void setSabotageInProgress(boolean sabotage) {
         this.sabotageInProgress = sabotage;
     }
 
     public boolean getSabotageInProgress() {
         return this.sabotageInProgress;
-    }
-
-    public void setInfiltratorsRemaining(int n) {
-        infiltratorsRemaining = n;
     }
 
     public int getInfiltratorsArrested() {
