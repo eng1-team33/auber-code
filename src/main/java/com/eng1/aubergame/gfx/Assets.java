@@ -13,6 +13,9 @@ public class Assets {
     public static BufferedImage player, world;
     public static BufferedImage[] playerWalking;
 
+    public static BufferedImage alien1, alien2;
+    public static BufferedImage[] alien1Walking, alien2Walking;
+
     public static BufferedImage[] buttonPlay;
     public static BufferedImage[] buttonDemo;
     public static BufferedImage[] buttonSettings;
@@ -32,6 +35,14 @@ public class Assets {
         playerWalking = new BufferedImage[2];
         playerWalking[0] = ImageLoader.loadImage("/textures/Auber1.png");
         playerWalking[1] = ImageLoader.loadImage("/textures/Auber2.png");
+
+        alien1Walking = new BufferedImage[2];
+        alien1Walking[0] = ImageLoader.loadImage("/textures/alien1_low.png");
+        alien1Walking[1] = ImageLoader.loadImage("/textures/alien1_high.png");
+
+        alien2Walking = new BufferedImage[2];
+        alien2Walking[0] = ImageLoader.loadImage("/textures/alien2_low.png");
+        alien2Walking[1] = ImageLoader.loadImage("/textures/alien2_high.png");
 
         buttonPlay = new BufferedImage[2];
         buttonPlay[0] = ImageLoader.loadImage("/textures/play.jpg");
@@ -71,9 +82,8 @@ public class Assets {
 
         world = ImageLoader.loadImage("/textures/map.png");
         player = ImageLoader.loadImage("/textures/Auber1.png");
-        //Crop out image from sheet using SpriteSheet.crop and set equal to BufferedImage
-        //player = sheet.crop(0, 0, width, height);
-        //width and height are width and height of each image in SpriteSheet
+        alien1 = ImageLoader.loadImage("/textures/alien1_low.png");
+        alien2 = ImageLoader.loadImage("/textures/alien2_low.png");
     }
 
 }
