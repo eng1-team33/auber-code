@@ -17,12 +17,11 @@ public class Teleporter extends System {
     private Rectangle teleRect;
 
     public Teleporter(Game game,Player player, float x, float y, String name) {
-        super(x, y, 45, 70);
+        super(game, x, y, 45, 70);
         this.game = game;
         this.player = player;
         this.camera = game.getCamera();
         this.name = name;
-        game.getTeleporterManager().add(this);
         teleRect = new Rectangle(Math.round(x), Math.round(y), 45, 70);
     }
 
@@ -34,9 +33,9 @@ public class Teleporter extends System {
             }
         }
     }
+
     @Override
     public void update() {
-
     }
 
     @Override
