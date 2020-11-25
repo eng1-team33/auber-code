@@ -35,6 +35,10 @@ public class Room extends Entity{
 
     }
 
+    public void addAdjacentRoom(Room room) {
+        adjacentRooms.add(room);
+    }
+
     public System getRandomSystem() {
         randomIndex = ThreadLocalRandom.current().nextInt(0, activeSystems.size());
         return activeSystems.get(randomIndex);

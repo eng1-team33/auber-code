@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class System extends Entity {
 
-    protected boolean destroyed = false;
+    protected boolean sabotaged = false;
 
     protected System(float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -22,8 +22,8 @@ public class System extends Entity {
 
     }
 
-    public void destroy(){
-        this.destroyed = true;
+    public void sabotage(){
+        this.sabotaged = true;
     }
 
 }

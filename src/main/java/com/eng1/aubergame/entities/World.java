@@ -18,10 +18,50 @@ public class World extends Entity {
         this.game = game;
         this.camera = game.getCamera();
 
-        //TODO
-        //Add all rooms to world.rooms
+        //Rooms sorted top left to bottom right, read like a book
+        Room infirmary = new Room(2607, 967, 258, 387);
+        Room lab = new Room(3117, 967, 384, 387);
+        Room cargo1 = new Room(4002, 967, 381, 381);
+        Room cargo2 = new Room(4509, 970, 381, 381);
+        Room empty1 = new Room(2610, 1729, 381, 380);
+        Room captains = new Room(3117, 1603, 381, 635);
+        Room weaponControl = new Room(3618, 1726, 261, 383);
+        Room missileStorage = new Room(4002, 1603, 381, 635);
+        Room brig = new Room(4506, 1603, 387, 635);
+        Room empty2 = new Room(2610, 2487, 381, 384);
+        Room empty3 = new Room(3117, 2484, 381, 387);
+        Room empty4 = new Room(4002, 2487, 381, 384);
+        Room empty5 = new Room(4509, 2487, 381, 384);
+        Room cafeLeft = new Room(2610, 2994, 443, 255);
+        Room cafeRight = new Room(3053, 2994, 445, 255);
+        Room decontamination = new Room(4002, 2994, 381, 255);
+        Room empty6 = new Room(4509, 2994, 381, 255);
+
+        addRoomConnection(infirmary, lab);
+        addRoomConnection(lab, cargo1);
+        addRoomConnection(lab, captains);
+        addRoomConnection(cargo1, cargo2);
+        addRoomConnection(cargo1, missileStorage);
+        addRoomConnection(cargo2, brig);
+        addRoomConnection(empty1, captains);
+        addRoomConnection(captains, weaponControl);
+        addRoomConnection(weaponControl, missileStorage);
+        addRoomConnection(missileStorage, brig);
+        addRoomConnection(empty1, empty2);
+        addRoomConnection(captains, empty3);
+        addRoomConnection(empty2, cafeLeft);
+        addRoomConnection(empty2, empty3);
+        addRoomConnection(cafeLeft, cafeRight);
+        addRoomConnection(cafeRight, empty3);
+        addRoomConnection(empty3, empty4);
+        addRoomConnection(missileStorage, empty4);
+        addRoomConnection(brig, empty5);
+        addRoomConnection(empty4, decontamination);
+        addRoomConnection(empty4, empty5);
+        addRoomConnection(empty5, empty6);
+
         //Add all systems to each room.systems
-        //Add adjacent rooms to each room.adjacent
+
     }
 
     @Override
@@ -53,6 +93,11 @@ public class World extends Entity {
             }
         }
         return null;
+    }
+
+    public void addRoomConnection(Room room1, Room room2){
+        room1.addAdjacentRoom(room2);
+        room2.addAdjacentRoom(room1);
     }
 
 }
