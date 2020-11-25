@@ -1,11 +1,15 @@
 package com.eng1.aubergame.gfx;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
 public class Assets {
 
     //List out all image assets used in the game
     //public static BufferedImage player, dirt, grass, stone, tree, ... ;
+    public static Font font28;
+
     public static BufferedImage player, world;
     public static BufferedImage[] playerWalking;
 
@@ -22,6 +26,8 @@ public class Assets {
 
     public static void init() {
         //SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage(path));
+
+        font28 = FontLoader.loadFont(Assets.class.getResourceAsStream("/fonts/MandatoryPlaything-nRRd0.ttf"),28);
 
         playerWalking = new BufferedImage[2];
         playerWalking[0] = ImageLoader.loadImage("/textures/Auber1.png");

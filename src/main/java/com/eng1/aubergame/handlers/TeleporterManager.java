@@ -41,6 +41,7 @@ public class TeleporterManager {
                 game.getMouseManager().setUIManager(null);
                 player.setX(teleporters.get(0).getX());
                 player.setY(teleporters.get(0).getY());
+                menuActive = false;
             }
         }));
         teleportButtons.addObject(new UIImageButton(710, 250, 300, 150, Assets.buttonInfirmary, new ClickListener() {
@@ -50,6 +51,7 @@ public class TeleporterManager {
 
                 player.setX(teleporters.get(1).getX());
                 player.setY(teleporters.get(1).getY());
+                menuActive = false;
             }
         }));
         teleportButtons.addObject(new UIImageButton(710, 450, 300, 150, Assets.buttonCargo, new ClickListener() {
@@ -58,6 +60,7 @@ public class TeleporterManager {
                 game.getMouseManager().setUIManager(null);
                 player.setX(teleporters.get(2).getX());
                 player.setY(teleporters.get(2).getY());
+                menuActive = false;
             }
         }));
         teleportButtons.addObject(new UIImageButton(710, 650, 300, 150, Assets.buttonLounge, new ClickListener() {
@@ -66,6 +69,7 @@ public class TeleporterManager {
                 game.getMouseManager().setUIManager(null);
                 player.setX(teleporters.get(3).getX());
                 player.setY(teleporters.get(3).getY());
+                menuActive = false;
             }
         }));
         teleportButtons.addObject(new UIImageButton(710, 850, 300, 150, Assets.buttonKitchen, new ClickListener() {
@@ -74,6 +78,7 @@ public class TeleporterManager {
                 game.getMouseManager().setUIManager(null);
                 player.setX(teleporters.get(4).getX());
                 player.setY(teleporters.get(4).getY());
+                menuActive = false;
             }
         }));
     }

@@ -179,6 +179,14 @@ public class Game implements Runnable {
         infiltratorsInGame = n;
     }
 
+    public int getInfiltratorsArrested() {
+        return infiltratorsArrested;
+    }
+
+    public int getInfiltratorsInGame() {
+        return infiltratorsInGame;
+    }
+
     public synchronized void start() {
         if (running) {
             return;
