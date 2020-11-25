@@ -147,7 +147,6 @@ public class World extends Entity {
     }
 
     public Room getRandomRoom() {
-        java.lang.System.out.println((int)(Math.abs(ThreadLocalRandom.current().nextInt()) % rooms.size()));
         return rooms.get((int)((int)(Math.abs(ThreadLocalRandom.current().nextInt()) % rooms.size())));
     }
 
